@@ -21,8 +21,8 @@
 			<div class="panel-heading">Board Read Page</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
-				
-					<label>번호</label><input class="form-control" name='bno'
+				<div class="form-group">
+				<label>번호</label><input class="form-control" name='bno'
 						value='<c:out value="${board.bno}"/>' readonly="readonly">
 				</div>
 	
@@ -47,8 +47,10 @@
 					<!-- onclick="location.href='/board/list'" -->
 				<form id='operForm' action="/board/modify" method="get">
 					<input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
+					<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}"/>'>
+					<input type='hidden' name='amount' value='<c:out value="${cri.amount}"/>'>
 				</form>
-			<div class="form-group"></div>
+			</div>
 			<!-- end panel-body -->
 
 		</div>
@@ -70,8 +72,9 @@
 		$("button[data-oper='list']").on("click", function(e){
 					
 			operForm.find("#bno").remove();
-			operForm.attr("action", "/board/list")
-			operForm.submit;
+			operForm.attr("action", "/board/list").submit();
+			
+			
 		});
 	});
 
