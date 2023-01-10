@@ -61,6 +61,10 @@
 	<!-- end col-lg-12 -->
 </div>
 <!-- /.row -->
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+
 <script>
 	$(document).ready(function(){
 		
@@ -77,6 +81,41 @@
 			operForm.attr("action", "/board/list").submit();
 			
 			
+		});
+		
+		/* $(document).ready(function(){
+			console.log(replyService);
+		}); */
+		
+		console.log("============");
+		console.log("JS TEST");
+		
+		var bnoValue = '<c:out value="${board.bno}"/>';
+		
+		replyService.add(
+				{reply:"JS Test", replyer:"tester", bno:bnoValue}
+				,
+				function(result){
+					alert("RESULT: " + result);
+				}
+		);
+		
+		replyService.getList({bno:bnoValue, page:1}, function(list){
+			
+			for(var i = 0, len = list.length||0; i < len; i++){
+				console.log(list[i]);
+			}
+		});
+		
+		replyService.remove(23, function(count){
+			
+			console.log(count);
+			
+			if (count === "success") {
+				alert("REMOVED");
+			}
+		}, function(err){
+			alert("ERROR......");
 		});
 	});
 
